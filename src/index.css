@@ -1,0 +1,387 @@
+@import "tailwindcss";
+
+@layer base {
+  html, body, #root {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: none;
+    font-family: 'Outfit', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-text-size-adjust: 100%;
+    background-color: #d9c4a2;
+  }
+
+  img, svg, canvas {
+    image-rendering: -webkit-optimize-contrast;
+    shape-rendering: geometricPrecision;
+  }
+}
+
+/* Warm parchment theme canvas */
+.bg-exact-warm {
+  background: radial-gradient(circle at 50% 25%, #e6d5b7 0%, #dbcaa6 45%, #ceb58e 100%);
+}
+
+/* Liquid Glass Modal Surface */
+.liquid-glass-menu {
+  position: relative;
+  background: linear-gradient(180deg, rgba(248, 240, 226, 0.84) 0%, rgba(230, 216, 192, 0.58) 48%, rgba(214, 196, 166, 0.78) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 20px 40px -10px rgba(115, 88, 48, 0.3),
+    0 6px 16px -4px rgba(85, 62, 32, 0.16),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.9),
+    inset 0 -2.5px 4px rgba(115, 88, 52, 0.25);
+}
+
+.liquid-glass-menu::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(180deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.6) 24%,
+    rgba(255, 255, 255, 0.28) 54%,
+    rgba(190, 160, 115, 0.2) 80%,
+    rgba(145, 118, 78, 0.28) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Top rim glowing highlight */
+.glass-glow-rim {
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.25) 15%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0.25) 85%,
+    transparent 100%
+  );
+  border-radius: 9999px;
+  filter: drop-shadow(0 1px 3px rgba(255, 255, 255, 0.9));
+  pointer-events: none;
+}
+
+/* Tactile debossed brand lettering */
+.text-debossed {
+  color: #241407;
+  text-shadow:
+    0 -1.5px 1px rgba(0, 0, 0, 0.5),
+    0 1px 1px rgba(255, 255, 255, 0.9),
+    0 2px 3px rgba(255, 255, 255, 0.45);
+}
+
+/* Premium Donate Now Button — 3-Second Subtle Pop + Depth Glow + Realistic Light Sweep */
+@keyframes donateButtonPopCycle {
+  0%, 58%, 100% {
+    transform: scale(1) translateZ(0);
+    box-shadow:
+      0 14px 30px -8px rgba(44, 23, 8, 0.54),
+      0 4px 12px -2px rgba(217, 119, 6, 0.16),
+      inset 0 1px 1px rgba(255, 255, 255, 0.28);
+  }
+  70% {
+    transform: scale(1.038) translateY(-1px) translateZ(0);
+    box-shadow:
+      0 20px 38px -8px rgba(44, 23, 8, 0.62),
+      0 0 24px -2px rgba(245, 158, 11, 0.34),
+      0 0 0 1.5px rgba(251, 191, 36, 0.32),
+      inset 0 1.5px 2px rgba(255, 255, 255, 0.42);
+  }
+  81% {
+    transform: scale(0.994) translateZ(0);
+    box-shadow:
+      0 14px 28px -8px rgba(44, 23, 8, 0.54),
+      0 4px 12px -2px rgba(217, 119, 6, 0.2),
+      inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  }
+  90% {
+    transform: scale(1.006) translateZ(0);
+  }
+}
+
+@keyframes donateButtonShineSweep {
+  0%, 56% {
+    transform: translateX(-160%) skewX(-24deg);
+    opacity: 0;
+  }
+  62% {
+    opacity: 0.95;
+  }
+  84% {
+    transform: translateX(260%) skewX(-24deg);
+    opacity: 0.95;
+  }
+  90%, 100% {
+    transform: translateX(260%) skewX(-24deg);
+    opacity: 0;
+  }
+}
+
+@keyframes donateButtonAuraPulse {
+  0%, 58%, 100% {
+    opacity: 0.22;
+    transform: scale(0.98);
+  }
+  72% {
+    opacity: 0.58;
+    transform: scale(1.04);
+  }
+  86% {
+    opacity: 0.26;
+    transform: scale(1);
+  }
+}
+
+.donate-cta-premium {
+  animation: donateButtonPopCycle 3s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  will-change: transform, box-shadow;
+}
+
+.donate-cta-premium:active {
+  animation-play-state: paused;
+  transform: scale(0.97) !important;
+}
+
+.donate-cta-shine-beam {
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 248, 235, 0.08) 28%,
+    rgba(255, 255, 255, 0.48) 48%,
+    rgba(253, 230, 138, 0.32) 55%,
+    rgba(255, 255, 255, 0.08) 72%,
+    transparent 100%
+  );
+  animation: donateButtonShineSweep 3s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  will-change: transform, opacity;
+}
+
+.donate-cta-aura {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(245, 158, 11, 0.36) 0%,
+    rgba(244, 63, 94, 0.2) 48%,
+    transparent 74%
+  );
+  filter: blur(10px);
+  animation: donateButtonAuraPulse 3s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Subtle, heartbeat-like pulsing animation for donation confirmation button */
+@keyframes donationHeartbeatPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(95, 70, 40, 0.12);
+  }
+  14% {
+    transform: scale(1.026);
+    box-shadow: 0 4px 16px rgba(217, 119, 6, 0.28), 0 0 0 1.5px rgba(217, 119, 6, 0.35);
+  }
+  28% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(95, 70, 40, 0.12);
+  }
+  42% {
+    transform: scale(1.018);
+    box-shadow: 0 3px 12px rgba(217, 119, 6, 0.22), 0 0 0 1px rgba(217, 119, 6, 0.25);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(95, 70, 40, 0.12);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 2px 8px rgba(95, 70, 40, 0.12);
+  }
+}
+
+.animate-donation-heartbeat {
+  animation: donationHeartbeatPulse 1.75s ease-in-out infinite;
+  will-change: transform, box-shadow;
+}
+
+/* Silent Screenshot & Screen-Recording Protection (Defensive CSS) */
+@media print {
+  body.donate-protection-active {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  .donate-protected-content {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+.donate-protected-content {
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
+
+/* Subtle floating warm bubbles */
+@keyframes floatUpSoftly {
+  0% {
+    transform: translateY(105vh) translateX(0px) scale(0.9);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.28;
+    transform: translateY(85vh) translateX(8px) scale(1.03);
+  }
+  60% {
+    transform: translateY(35vh) translateX(10px) scale(1.05);
+    opacity: 0.38;
+  }
+  88% {
+    opacity: 0.2;
+    transform: translateY(8vh) translateX(-5px) scale(0.97);
+  }
+  100% {
+    transform: translateY(-10vh) translateX(4px) scale(0.9);
+    opacity: 0;
+  }
+}
+
+.floating-bubble-soft {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 248, 235, 0.15) 45%, rgba(225, 200, 160, 0.08) 80%, rgba(185, 150, 100, 0.04) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.45),
+    inset 0 -1.5px 2px rgba(160, 130, 85, 0.12),
+    0 4px 10px rgba(140, 110, 70, 0.05);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  animation-name: floatUpSoftly;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-fill-mode: backwards;
+  will-change: transform, opacity;
+}
+
+/* Modal Entrance & Exit Animations */
+@keyframes contactModalPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+    filter: blur(6px);
+  }
+  45% {
+    opacity: 0.85;
+    filter: blur(1.5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.animate-contact-modal {
+  animation: contactModalPop 0.42s cubic-bezier(0.16, 1, 0.28, 1) both;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes contactModalOut {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.92) translateY(16px);
+    filter: blur(6px);
+  }
+}
+
+.animate-contact-modal-close {
+  animation: contactModalOut 0.24s cubic-bezier(0.36, 0, 0.66, -0.04) forwards;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes aboutModalClose {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.93) translateY(12px);
+    filter: blur(5px);
+  }
+}
+
+.animate-about-modal-close {
+  animation: aboutModalClose 0.24s cubic-bezier(0.36, 0, 0.66, -0.04) forwards;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes contactBackdropFade {
+  0% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+.animate-contact-backdrop {
+  animation: contactBackdropFade 0.36s cubic-bezier(0.16, 1, 0.28, 1) both;
+  will-change: opacity, backdrop-filter;
+}
+
+@keyframes contactBackdropFadeOut {
+  0% {
+    opacity: 1;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  100% {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+}
+
+.animate-contact-backdrop-close {
+  animation: contactBackdropFadeOut 0.24s cubic-bezier(0.36, 0, 0.66, -0.04) forwards;
+  will-change: opacity, backdrop-filter;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .donate-cta-premium,
+  .donate-cta-shine-beam,
+  .donate-cta-aura,
+  .animate-donation-heartbeat,
+  .floating-bubble-soft {
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
